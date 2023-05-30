@@ -57,3 +57,10 @@ This will automatically fetch the conda file as well.
 ```bash
 az ml environment create --file env-aml-pillow.yml
 ```
+
+## Create the components
+
+Execute these commands inside of the respective folder.
+```bash
+az ml component create --file dataprep.yml
+```

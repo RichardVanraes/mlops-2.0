@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  mlops-dev:
+    image: mlops
+    build:
+      context: azureml-1.0-automation
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./azureml-1.0-automation:/app
+    entrypoint: /bin/bash
