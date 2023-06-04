@@ -5,6 +5,8 @@ on:
     branches: [ main, master ]
 
 jobs:
+  build:
+    runs-on: self-hosted
   start:
     uses: ./.github/workflows/azure-ai.yml
     with:
