@@ -86,11 +86,11 @@ on:
 env:
   CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
 
-  CLIENT_ID: 7bf2b3d8-765a-407d-b47a-2ee4a392c378 # Change this !
-  TENANT_ID: 4ded4bb1-6bff-42b3-aed7-6a36a503bf7a # Change this !
-  WORKSPACE_NAME: mlops-auto # Change this !
-  RESOURCE_GROUP: mlops # Change this !
-  SUBSCRIPTION_ID: 7c50f9c3-289b-4ae0-a075-08784b3b9042 # Change this !
+  CLIENT_ID: ${{ vars.CLIENT_ID }}
+  TENANT_ID: ${{ vars.TENANT_ID }}
+  WORKSPACE_NAME: richard-vanraes-ml # Change this !
+  RESOURCE_GROUP: mlops-demo # Change this !
+  SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
 
   ANIMALS: cats,dogs,pandas # As we have three classes, let's just defined them here. This way we can easily loop over them later.
   TRAIN_SET_NAME: animals-training-set
@@ -275,7 +275,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Docker Build and push
         id: docker_build
