@@ -160,7 +160,7 @@ jobs:
       EXPERIMENT_NAME: animal-classification
 
       ## Compute cluster parts
-      AML_COMPUTE_CLUSTER_NAME: nathan-cpu-cluster
+      AML_COMPUTE_CLUSTER_NAME: richard-cpu-cluster
       AML_COMPUTE_CLUSTER_MIN_NODES: 1
       AML_COMPUTE_CLISTER_MAX_NODES: 4
       AML_COMPUTE_CLUSTER_SKU: STANDARD_D2_V2
@@ -260,7 +260,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/nathansegers/mlops-2.0
+            ghcr.io/richardvanraes/mlops-2.0
           # generate Docker tags based on the following events/attributes:
           # The GitHub Branch
           # The GitHub SHA
