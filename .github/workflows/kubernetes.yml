@@ -34,7 +34,7 @@ jobs:
     steps:
         # Pull a Docker image
         - name: Pull Docker image
-          run: docker pull ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}:latest
+          run: docker pull ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}
         
          # A KubeCTL action which will apply a Kubernetes object to your cluster
         - name: Run KubeCtl
