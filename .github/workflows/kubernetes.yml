@@ -1,0 +1,27 @@
+name: Push to Kubernetes
+
+on:
+    workflow_dispatch:
+
+env:
+    NAMESPACE: ${{ vars.NAMESPACE }}
+    GIT_REGISTRY: ghcr.io
+    GIT_REPO_OWNER: ${{ github.repository_owner }}
+    GIT_IMAGE_NAME: mlops-2.0
+
+jobs:
+  push:
+    runs-on: self-hosted
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v3
+  
+         
+        # Pull a Docker image
+        - name: Pull Docker image
+          run: docker pull ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}:latest
+        
+         # A KubeCTL action which will apply a Kubernetes object to your cluster
+        - name: Run KubeCtl
+          run: kubectl create -f ./kubernetes/deployment.yml

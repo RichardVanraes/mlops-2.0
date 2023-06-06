@@ -1,0 +1,19 @@
+name: Exit from Kubernetes
+
+on:
+    workflow_dispatch:
+
+env:
+    NAMESPACE: ${{ vars.NAMESPACE }}
+
+jobs:
+  delete:
+    runs-on: self-hosted
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v3
+  
+        # Delete namespace
+        - name: Delete namespace
+          run: kubectl delete namespace ${{ env.NAMESPACE }}

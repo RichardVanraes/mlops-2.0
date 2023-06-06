@@ -96,6 +96,10 @@ env:
   TRAIN_SET_NAME: animals-training-set
   TEST_SET_NAME: animals-testing-set
   MODEL_NAME: animal-cnn
+  
+  GIT_REGISTRY: ghcr.io
+  GIT_REPO_OWNER: ${{ github.repository_owner }}
+  GIT_IMAGE_NAME: mlops-2.0
 
   SCRIPT_FOLDER: scripts
 
@@ -260,8 +264,8 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/richardvanraes/mlops-2.0
-          # generate Docker tags based on the following events/attributes:
+            ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}
+          # generate Docker tags based on the  following events/attributes:
           # The GitHub Branch
           # The GitHub SHA
           # More info: https://github.com/docker/build-push-action/blob/master/docs/advanced/tags-labels.md
@@ -273,7 +277,7 @@ jobs:
       - name: Login to GHCR
         uses: docker/login-action@v1
         with:
-          registry: ghcr.io
+          registry: ${{ env.GIT_REGISTRY }}
           username: ${{ github.repository_owner }}
           password: ${{ secrets.TOKEN_GITHUB }}
 
