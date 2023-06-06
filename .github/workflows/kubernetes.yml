@@ -34,20 +34,10 @@ jobs:
     runs-on: self-hosted
     steps:
       
-      - name: Gather Docker Meta Information
-        id: meta
-        uses: docker/metadata-action@v3
-        with:
-          # list of Docker images to use as base name for tags
-          images: |
-            ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}
-          # generate Docker tags based on the  following events/attributes:
-          # The GitHub Branch
-          # The GitHub SHA
-          # More info: https://github.com/docker/build-push-action/blob/master/docs/advanced/tags-labels.md
-          tags: |
-            type=ref,event=branch
-            type=sha
+      - name: Gather Github short SHA
+        id: get_sha
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
         # Login to GHCR
       - name: Login to GHCR
         uses: docker/login-action@v1
@@ -58,7 +48,7 @@ jobs:
 
       # Pull a Docker image
       - name: Pull Docker image
-        run: docker pull ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}:${{ steps.meta.outputs.labels.sha }}
+        run: docker pull ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}:sha-${{ steps.get_sha.outputs.sha_short }}
         
          # A KubeCTL action which will apply a Kubernetes object to your cluster
       - name: Run KubeCtl
