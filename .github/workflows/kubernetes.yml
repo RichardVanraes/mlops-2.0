@@ -2,6 +2,12 @@ name: Push to Kubernetes
 
 on:
     workflow_dispatch:
+      inputs:
+        new_namespace:
+          description: 'New Namespace'
+          type: boolean
+          default: true
+          required: true
 
 env:
     NAMESPACE: ${{ vars.NAMESPACE }}
@@ -10,14 +16,22 @@ env:
     GIT_IMAGE_NAME: mlops-2.0
 
 jobs:
-  push:
+  namespace:
+    if: ${{ inputs.new_namespace 
+      }}
     runs-on: self-hosted
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        - uses: actions/checkout@v3
+        # - uses: actions/checkout@v3
   
-         
+        # Create a new namespace
+        - name: Create Namespace
+          run: kubectl create namespace ${{ env.NAMESPACE }}
+  
+  pull:
+    runs-on: self-hosted
+    steps:
         # Pull a Docker image
         - name: Pull Docker image
           run: docker pull ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}:latest

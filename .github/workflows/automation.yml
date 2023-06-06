@@ -16,3 +16,4 @@ jobs:
       train_on_local: true
       local_deployment: true
     secrets: inherit
+    

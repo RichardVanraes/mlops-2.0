@@ -2,12 +2,20 @@ name: Exit from Kubernetes
 
 on:
     workflow_dispatch:
+      inputs:
+        del_namespace:
+          description: 'Delete Namespace'
+          type: boolean
+          default: true
+          required: true
 
 env:
     NAMESPACE: ${{ vars.NAMESPACE }}
 
 jobs:
   delete:
+    if: ${{ inputs.del_namespace 
+      }}
     runs-on: self-hosted
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
