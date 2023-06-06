@@ -53,10 +53,6 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.TOKEN_GITHUB }}  
 
-      - name: Gather Github short SHA
-        id: get_sha
-        run: echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
-
       # Pull a Docker image
       - name: Pull Docker image
         run: docker pull ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}:sha-${{ steps.short-sha.outputs.sha }}
