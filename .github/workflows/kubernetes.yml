@@ -32,7 +32,14 @@ jobs:
   pull:
     runs-on: self-hosted
     steps:
-        # Pull a Docker image
+      # Login to GHCR 
+        - name: Login to GHCR
+          uses: docker/login-action@v1
+          with:
+            registry: ${{ env.GIT_REGISTRY }}
+            username: ${{ github.repository_owner }}
+            password: ${{ secrets.TOKEN_GITHUB }}  
+      # Pull a Docker image
         - name: Pull Docker image
           run: docker pull ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}
         
