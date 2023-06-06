@@ -26,6 +26,10 @@ env:
     GIT_IMAGE_NAME: mlops-2.0
     GIT_SHA: ${{ github.sha }} # Set the SHA to use in the code
 
+defaults:
+  run:
+    working-directory: ./app
+
 jobs:
   namespace:
     if: ${{ inputs.new_namespace 
@@ -83,7 +87,7 @@ jobs:
       }} 
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
          # A KubeCTL action which will apply a Kubernetes object to your cluster
       - name: check files
         run: ls
