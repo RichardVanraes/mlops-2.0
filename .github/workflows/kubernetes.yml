@@ -34,11 +34,6 @@ jobs:
     runs-on: self-hosted
     steps:
       
-      - name: Download docker-config artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: docker-config
-
       - name: Gather Docker Meta Information
         id: meta
         uses: docker/metadata-action@v3
