@@ -6,7 +6,17 @@ on:
         new_namespace:
           description: 'New Namespace'
           type: boolean
-          default: true
+          default: false
+          required: true
+        pull_image:
+          description: 'Pull Image'
+          type: boolean
+          default: false
+          required: true
+        deploy_container:
+          description: 'Deploy on Kubernetes'
+          type: boolean
+          default: false
           required: true
 
 env:
@@ -31,6 +41,12 @@ jobs:
           run: kubectl create namespace ${{ env.NAMESPACE }}
   
   pull:
+    needs: [namespace]
+    if: ${{
+        always() &&
+        (needs.namespace.result == 'success' || needs.namespace.result == 'skipped') &&
+        inputs.pull_image
+      }}
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
@@ -56,7 +72,18 @@ jobs:
       # Pull a Docker image
       - name: Pull Docker image
         run: docker pull ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}:sha-${{ steps.short-sha.outputs.sha }}
-        
+    
+  deploy:
+    needs: [namespace,pull]
+    if: ${{
+        always() &&
+        (needs.namespace.result == 'success' || needs.namespace.result == 'skipped') &&
+        (needs.pull.result == 'success' || needs.pull.result == 'skipped') &&
+        inputs.deploy_container
+      }} 
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
          # A KubeCTL action which will apply a Kubernetes object to your cluster
       - name: Run KubeCtl
-        run: kubectl create -f ./azureml-1.0-automation/kubernetes/deployment.yml -n ${{ env.NAMESPACE }}
+        run: kubectl create -f ./kubernetes/deployment.yml -n ${{ env.NAMESPACE }}

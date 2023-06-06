@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: azureml-configmap
 data:
-  namespace: "mlops_05"
+  namespace: "mlops-05"
