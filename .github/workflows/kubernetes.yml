@@ -12,7 +12,7 @@ on:
 env:
     NAMESPACE: ${{ vars.NAMESPACE }}
     GIT_REGISTRY: ghcr.io
-    GIT_REPO_OWNER: ${{ github.repository_owner }}
+    GIT_REPO_OWNER: ${{ github.repository_owner.lowercase }}
     GIT_IMAGE_NAME: mlops-2.0
 
 jobs:
