@@ -86,4 +86,4 @@ jobs:
       - uses: actions/checkout@v2
          # A KubeCTL action which will apply a Kubernetes object to your cluster
       - name: Run KubeCtl
-        run: kubectl create -f ./kubernetes/deployment.yml -n ${{ env.NAMESPACE }}
+        run: kubectl create -f kubernetes/deployment.yml -n ${{ env.NAMESPACE }}
