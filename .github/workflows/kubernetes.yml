@@ -14,6 +14,7 @@ env:
     GIT_REGISTRY: ghcr.io
     GIT_REPO_OWNER: richardvanraes
     GIT_IMAGE_NAME: mlops-2.0
+    GIT_SHA: ${{ github.sha }} # Set the SHA to use in the code
 
 jobs:
   namespace:
@@ -41,7 +42,7 @@ jobs:
             password: ${{ secrets.TOKEN_GITHUB }}  
       # Pull a Docker image
         - name: Pull Docker image
-          run: docker pull ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}
+          run: docker pull ${{ env.GIT_REGISTRY }}/${{ env.GIT_REPO_OWNER }}/${{ env.GIT_IMAGE_NAME }}:${{ env.GIT_SHA }}
         
          # A KubeCTL action which will apply a Kubernetes object to your cluster
         - name: Run KubeCtl

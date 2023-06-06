@@ -44,7 +44,6 @@ on:
         required: true
 
   workflow_dispatch:
-    branches: [ main, master ]
     inputs:
       data_prep:
         description: 'Data preparing'
@@ -123,7 +122,7 @@ jobs:
       DATASET_VERSION: 'latest'
       TRAIN_TEST_SPLIT_FACTOR: 0.20
       PROCESS_IMAGES: ${{ inputs.process_images }} # Make the pipeline skip processing the images
-      SPLIT_IMAGES: ${{ inputs.skip_images }} # Make the pipeline skip splitting the images
+      SPLIT_IMAGES: ${{ inputs.split_images }} # Make the pipeline skip splitting the images
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
