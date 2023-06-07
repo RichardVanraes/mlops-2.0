@@ -6,15 +6,15 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: api-mlops-2.0
+      app: api-mlops-2-0
   replicas: 2
   template:
     metadata:
       labels:
-        app: api-mlops-2.0
+        app: api-mlops-2-0
     spec:
       containers:
-      - name: api-mlops-2.0
+      - name: api-mlops-2-0
         image: ghcr.io/richardvanraes/mlops-2.0:sha-2584de8 # moet nog iets vinden op de sha-code automatisch te laten aanpassen
         ports:
         - containerPort: 80
@@ -38,7 +38,7 @@ metadata:
   namespace: mlops-05
 spec:
   selector:
-    app: api-mlops-2.0
+    app: api-mlops-2-0
   ports:
   - nodePort: 30010
     port: 80
