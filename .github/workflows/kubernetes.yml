@@ -26,9 +26,9 @@ env:
     GIT_IMAGE_NAME: mlops-2.0
     GIT_SHA: ${{ github.sha }} # Set the SHA to use in the code
 
-# defaults:
-#    run:
-#     working-directory: .
+defaults:
+   run:
+    working-directory: kubernetes
 
 jobs:
   namespace:
@@ -92,6 +92,6 @@ jobs:
 
       - name: list files
         run: ls
-           
+
       - name: Run KubeCtl
         run: kubectl create -f ./deployment.yml -n ${{ env.NAMESPACE }}
