@@ -87,20 +87,8 @@ jobs:
       }} 
     runs-on: self-hosted
     steps:
-      - name: Checkout files
-        uses: Bhacaz/checkout-files@v2
-        with:
-          files: kubernetes/deployment.yml
-
       - uses: actions/checkout@v3
-        with:
-          path: ./kubernetes
-
          # A KubeCTL action which will apply a Kubernetes object to your cluster
-
-      - name: list files
-        run: ls
-        working-directory: ${{ github.workspace }}
 
       - name: Run KubeCtl
         run: kubectl create -f ${{ github.workspace }}\kubernetes\deployment.yml -n ${{ env.NAMESPACE }}
