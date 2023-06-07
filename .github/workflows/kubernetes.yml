@@ -103,5 +103,5 @@ jobs:
         working-directory: ${{ github.workspace }}
 
       - name: Run KubeCtl
-        run: kubectl create -f ${{ github.workspace }}\Kubernetes\deployment.yml -n ${{ env.NAMESPACE }}
+        run: kubectl create -f ${{ github.workspace }}\kubernetes\deployment.yml -n ${{ env.NAMESPACE }}
         
