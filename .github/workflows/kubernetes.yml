@@ -87,10 +87,10 @@ jobs:
       }} 
     runs-on: self-hosted
     steps:
-      # - name: Checkout files
-      #   uses: Bhacaz/checkout-files@v2
-      #   with:
-      #     files: kubernetes/deployment.yml
+      - name: Checkout files
+        uses: Bhacaz/checkout-files@v2
+        with:
+          files: kubernetes/deployment.yml
 
       - uses: actions/checkout@v3
         with:
@@ -103,5 +103,5 @@ jobs:
         working-directory: ./kubernetes
 
       - name: Run KubeCtl
-        run: kubectl create -f deployment.yml -n ${{ env.NAMESPACE }}
+        run: kubectl create -f ./deployment.yml -n ${{ env.NAMESPACE }}
         working-directory: ./kubernetes
