@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-deployment
+  name: api-mlops-2-0
   namespace: mlops-05
 spec:
   selector:
@@ -19,18 +19,18 @@ spec:
         ports:
         - containerPort: 80
 ---
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   generateName: mypod-
-#   namespace: mlops-05
-#   labels:
-#     name: mypod
-# spec:
-#   containers:
-#   - name: mypod
-#     image: ghcr.io/richardvanraes/mlops-2.0:latest
-# ---
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: mlops-mypod-
+  namespace: mlops-05
+  labels:
+    name: mypod
+spec:
+  containers:
+  - name: mypod
+    image: ghcr.io/richardvanraes/mlops-2.0:sha-2584de8
+---
 apiVersion: v1
 kind: Service
 metadata:
