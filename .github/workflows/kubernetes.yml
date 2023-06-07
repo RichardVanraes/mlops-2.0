@@ -100,8 +100,8 @@ jobs:
 
       - name: list files
         run: ls
-        working-directory: ./kubernetes
+        working-directory: ${{ github.workspace }}
 
       - name: Run KubeCtl
-        run: kubectl create -f ${{ env.GITHUB_WORKSPACE }}/deployment.yml -n ${{ env.NAMESPACE }}
-        working-directory: ./kubernetes
+        run: kubectl create -f ${{ github.workspace }}/Kubernetes/deployment.yml -n ${{ env.NAMESPACE }}
+        
